@@ -1,6 +1,5 @@
 import random
 import re
-
 import requests
 import telebot
 
@@ -16,12 +15,12 @@ def get_text_messages(message):
         bot.send_message(message.from_user.id, "Привет, чем я могу тебе помочь?")
     elif message.text == "/help":
         bot.send_message(message.from_user.id, "Данный бот может рассказать погоду на ближайшие 2 дня в городе" +
-                         " Ульяновск (для этого команнда \"Погода\"). Так же бот может помочь" +
+                         " Ульяновск (для этого команда \"Погода\"). Так же бот может помочь" +
                          " с принятием решения (для этого нужно лишь задать вопрос с предпологаемыми ответами \"Да\" " +
                          "или \"Нет\").")
     elif message.text == "Погода":
         weather(message)
-    elif re.match('[A-zА-я0-9,?]+', message.text):
+    elif re.fullmatch('[A-z,А-я,0-9\s]+\?', message.text):
         ball_eight(message)
     else:
         bot.send_message(message.from_user.id, "Я тебя не понимаю. Напиши /help.")
